@@ -50,8 +50,15 @@ kotlin {
             }
         }
 
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+            }
+        }
+
         val androidMain by getting {
             dependencies {
+                implementation(compose.ui)
                 api("androidx.appcompat:appcompat:${vers.androidX.appCompat}")
                 api("androidx.core:core-ktx:${vers.androidX.core}")
             }

@@ -1,5 +1,6 @@
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
 
 plugins {
     id("com.android.application")
@@ -15,9 +16,10 @@ repositories {
     google()
 }
 
-rootProject.plugins.withType(org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin::class.java) {
-    rootProject.the<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension>().versions.webpackDevServer.version =
-        "4.0.0-rc.0"
+afterEvaluate {
+    rootProject.extensions.configure<NodeJsRootExtension> {
+        versions.webpackDevServer.version = "4.0.0"
+    }
 }
 
 android {
@@ -93,7 +95,7 @@ compose.desktop {
 
             modules("jdk.crypto.ec")
 
-            val iconsRoot = project.file("../common/src/desktopMain/resources/images")
+            val iconsRoot = project.file("src/jvmMain/resources/icons")
             macOS {
                 iconFile.set(iconsRoot.resolve("icon-mac.icns"))
             }
