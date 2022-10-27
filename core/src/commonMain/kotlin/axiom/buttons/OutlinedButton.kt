@@ -1,8 +1,8 @@
 package axiom.buttons
 
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import org.jetbrains.compose.common.material.Button
-import org.jetbrains.compose.common.material.Text
 
 @Composable
 fun OutlinedButton(text: String, onClick: (() -> Unit)? = null) {
