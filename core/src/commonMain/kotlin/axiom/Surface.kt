@@ -6,25 +6,20 @@ import aesthetics.Bound
 import aesthetics.Color
 import aesthetics.Padding
 import aesthetics.Unspecified
-import aesthetics.VerySmall
+import aesthetics.Small
+import aesthetics.toComposeColor
+import aesthetics.toPaddingValues
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.LocalAbsoluteElevation
-import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import axiom.aesthetics.toComposeColor
-import axiom.aesthetics.toPaddingValues
 import axiom.theme.LocalColorsProvider
 
 data class SurfaceParams(
     val color: Color = Unspecified,
-    val padding: Bound = Padding(size = VerySmall),
-//    val shape: Shape = RectangleShape,
-//    val border: BorderStroke? = null,
-//    val elevation: Dp = 0.dp,
+    val padding: Bound = Padding(size = Small),
 )
 
 @Composable

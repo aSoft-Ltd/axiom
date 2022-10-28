@@ -11,14 +11,6 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-//version = "1.0-SNAPSHOT"
-
-//repositories {
-//    google()
-//    mavenCentral()
-//    maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-//}
-
 kotlin {
     android()
     jvm()
@@ -30,7 +22,7 @@ kotlin {
                 api(compose.ui)
                 api(compose.foundation)
                 api(compose.material)
-                api(projects.aestheticsCore)
+                api(projects.aestheticsCompose)
             }
         }
 
@@ -63,15 +55,6 @@ kotlin {
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
 }
-
-// a temporary workaround for a bug in jsRun invocation - see https://youtrack.jetbrains.com/issue/KT-48273
-//afterEvaluate {
-//    rootProject.extensions.configure<NodeJsRootExtension> {
-//        versions.webpackDevServer.version = "4.0.0"
-//        versions.webpackCli.version = "4.9.0"
-//        nodeVersion = "16.0.0"
-//    }
-//}
 
 // TODO: remove when https://youtrack.jetbrains.com/issue/KT-50778 fixed
 project.tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile::class.java).configureEach {
