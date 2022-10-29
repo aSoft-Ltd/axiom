@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import axiom.Text
 
 // To be removed
 import androidx.compose.material.TextField as MTextField
@@ -27,15 +29,18 @@ fun TextInput(
     label: String? = null,
     hint: String? = null,
     onChanged: ((String) -> Unit)? = null
-) = Column {
+) = Column(
+    modifier = Modifier.fillMaxWidth()
+) {
     var text by remember { mutableStateOf(value ?: "") }
     var hideInput by remember { mutableStateOf(value?.isNotBlank() != true) }
-    BasicText(label ?: "", style = TextStyle(color = Color.Black))
-    MTextField(
-        value = text,
-        onValueChange = { text = it }
-    )
+    Text(label ?: "")
+//    MTextField(
+//        value = text,
+//        onValueChange = { text = it }
+//    )
     BasicTextField(
+        modifier = Modifier.fillMaxWidth(),
         value = text,
         onValueChange = {
             text = it

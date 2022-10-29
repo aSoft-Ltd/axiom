@@ -5,7 +5,6 @@ package axiom
 import aesthetics.Bound
 import aesthetics.Color
 import aesthetics.Padding
-import aesthetics.Unspecified
 import aesthetics.Small
 import aesthetics.toComposeColor
 import aesthetics.toPaddingValues
@@ -15,10 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import axiom.theme.AxiomColors
 import axiom.theme.LocalColorsProvider
 
 data class SurfaceParams(
-    val color: Color = Unspecified,
+    val background: Color? = null,
+    val color: Color? = null,
     val padding: Bound = Padding(size = Small),
 )
 
@@ -29,22 +30,19 @@ fun Surface(
     content: @Composable () -> Unit
 ) {
     val currentColors = LocalColorsProvider.current
-
-    val color = if (params.color.isSpecified) params.color else currentColors.surface
+    val background = params.background ?: currentColors.surface
+    val color = params.color ?: currentColors.onSurface
 
     Box(
         modifier = modifier
-            .background(color = color.toComposeColor())
+            .background(color = background.toComposeColor())
             .padding(params.padding.toPaddingValues())
     ) {
-        if (params.color.isSpecified) {
-            CompositionLocalProvider(
-                LocalColorsProvider provides currentColors.copy(surface = params.color)
-            ) {
-                content()
-            }
-        } else {
-            content()
-        }
+        CompositionLocalProvider(
+            LocalColorsProvider provides currentColors.copy(
+                surface = background,
+                onSurface = color
+            )
+        ) { content() }
     }
 }
