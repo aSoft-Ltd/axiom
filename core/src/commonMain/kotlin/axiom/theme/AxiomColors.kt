@@ -2,8 +2,10 @@ package axiom.theme
 
 import aesthetics.Color
 import aesthetics.RGB
+import aesthetics.RGBA
 
 data class AxiomColors(
-    val surface: Color = RGB(210, 210, 210),
-    val onSurface: Color = RGB(10, 10, 10)
+    val surface: Color = MilkyWhiteColors.surface,
+    val onSurface: Color = MilkyWhiteColors.onSurface,
+    val accent: Color = MilkyWhiteColors.accent
 )

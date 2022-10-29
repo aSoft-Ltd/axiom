@@ -10,11 +10,11 @@ import aesthetics.toComposeColor
 import aesthetics.toPaddingValues
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import axiom.theme.AxiomColors
 import axiom.theme.LocalColorsProvider
 
 data class SurfaceParams(
@@ -27,7 +27,7 @@ data class SurfaceParams(
 fun Surface(
     modifier: Modifier = Modifier,
     params: SurfaceParams = SurfaceParams(),
-    content: @Composable () -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     val currentColors = LocalColorsProvider.current
     val background = params.background ?: currentColors.surface
