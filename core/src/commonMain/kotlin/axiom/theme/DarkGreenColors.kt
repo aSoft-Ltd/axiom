@@ -8,5 +8,7 @@ val DarkCyanColors = AxiomColors(
     onPrimary = Grey.C900,
     surface = Grey.C900,
     onSurface = Grey.C100,
+    tint = Grey.C900,
+    tintBorder = Cyan.C300,
     accent = Cyan.C300
 )

@@ -8,5 +8,7 @@ val BlueWhiteColors = AxiomColors(
     onPrimary = Blue.C100,
     surface = Grey.C100,
     onSurface = Grey.C900,
-    accent = Blue.C400
+    tint = Grey.C100,
+    accent = Blue.C400,
+    tintBorder = Blue.C400
 )
