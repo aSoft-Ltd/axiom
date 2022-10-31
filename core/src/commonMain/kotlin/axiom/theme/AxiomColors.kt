@@ -1,11 +1,11 @@
 package axiom.theme
 
 import aesthetics.Color
-import aesthetics.RGB
-import aesthetics.RGBA
 
 data class AxiomColors(
-    val surface: Color = MilkyWhiteColors.surface,
-    val onSurface: Color = MilkyWhiteColors.onSurface,
-    val accent: Color = MilkyWhiteColors.accent
+    val primary: Color,
+    val onPrimary: Color,
+    val surface: Color,
+    val onSurface: Color,
+    val accent: Color
 )

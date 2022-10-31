@@ -26,6 +26,12 @@ kotlin {
             }
         }
 
+        val commonTest by getting {
+            dependencies {
+                api(projects.expectCore)
+            }
+        }
+
         val androidMain by getting {
             dependencies {
                 api(compose.foundation)

@@ -1,10 +1,12 @@
 package axiom.theme
 
-import aesthetics.RGB
-import aesthetics.RGBA
+import aesthetics.palettes.Cyan
+import aesthetics.palettes.Grey
 
-val DarkGreenColors = AxiomColors(
-    surface = RGB(16, 23, 31),
-    onSurface = RGB(250, 250, 250),
-    accent = RGBA(60, 215, 137, 0.4)
+val DarkCyanColors = AxiomColors(
+    primary = Cyan.C500,
+    onPrimary = Grey.C900,
+    surface = Grey.C900,
+    onSurface = Grey.C100,
+    accent = Cyan.C300
 )

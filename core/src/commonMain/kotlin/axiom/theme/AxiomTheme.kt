@@ -7,12 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 
-val LocalColorsProvider = compositionLocalOf { AxiomColors() }
+val LocalColorsProvider = compositionLocalOf { DarkCyanColors }
 val LocalTypographyProvider = compositionLocalOf { Typography() }
 
 @Composable
 fun AxiomTheme(
-    colors: AxiomColors = AxiomColors(),
+    colors: AxiomColors = DarkCyanColors,
     typography: Typography = Typography(),
     content: @Composable () -> Unit
 ) {
