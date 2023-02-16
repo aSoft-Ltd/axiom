@@ -1,9 +1,4 @@
-import org.jetbrains.compose.compose
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension
-import org.jetbrains.compose.experimental.dsl.IOSDevices
 
 plugins {
     id("com.android.library")
@@ -14,7 +9,8 @@ plugins {
 kotlin {
     android()
     jvm()
-//    js(IR) { browser() }
+    js(IR) { browser() }
+//    wasm { browser() }
 
     sourceSets {
         val commonMain by getting {
@@ -26,6 +22,10 @@ kotlin {
             }
         }
 
+        val canvasMain by creating {
+            dependsOn(commonMain)
+        }
+
         val commonTest by getting {
             dependencies {
                 api(projects.expectCore)
@@ -33,6 +33,7 @@ kotlin {
         }
 
         val androidMain by getting {
+            dependsOn(canvasMain)
             dependencies {
                 api(compose.foundation)
                 api(compose.uiTooling)
@@ -43,6 +44,7 @@ kotlin {
         }
 
         val jvmMain by getting {
+            dependsOn(canvasMain)
             dependencies {
                 api(compose.uiTooling)
                 api(compose.preview)
@@ -50,23 +52,23 @@ kotlin {
             }
         }
 
-//        val jsMain by getting {
+//        val wasmMain by getting {
+//            dependsOn(canvasMain)
 //            dependencies {
 //                api(compose.web.core)
 //            }
 //        }
+
+        val jsMain by getting {
+            dependencies {
+                api(compose.web.core)
+            }
+        }
     }
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "11"
-}
-
-// TODO: remove when https://youtrack.jetbrains.com/issue/KT-50778 fixed
-project.tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile::class.java).configureEach {
-    kotlinOptions.freeCompilerArgs += listOf(
-        "-Xir-dce-runtime-diagnostic=log"
-    )
 }
 
 android {
