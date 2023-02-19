@@ -67,9 +67,9 @@ kotlin {
     }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-}
+//tasks.withType<KotlinCompile> {
+//    kotlinOptions.jvmTarget = "11"
+//}
 
 android {
     compileSdk = 32
@@ -90,9 +90,9 @@ android {
         buildConfig = false
         compose = true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
-    }
+//    composeOptions {
+//        kotlinCompilerExtensionVersion = "1.3.2"
+//    }
 
     sourceSets {
         getByName("main") {
@@ -100,5 +100,22 @@ android {
 //            res.srcDirs("src/androidMain/res", "src/commonMain/resources")
 //        }
         }
+    }
+}
+
+compose {
+//    kotlinCompilerPlugin.set(dependencies.compiler.forKotlin("1.8.0"))
+    kotlinCompilerPlugin.set(kotlinz.versions.compose.compiler)
+    kotlinCompilerPluginArgs.add(kotlinz.versions.compose.compiler.map {
+        "suppressKotlinVersionCompatibilityCheck=$it"
+    })
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinCompile::class).configureEach {
+    kotlinOptions {
+        val v = kotlinz.versions.kotlin.get()
+        freeCompilerArgs += listOf(
+            "-P", "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=$v"
+        )
     }
 }
