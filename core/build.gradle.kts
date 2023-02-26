@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
     id("com.android.library")
@@ -90,9 +90,6 @@ android {
         buildConfig = false
         compose = true
     }
-//    composeOptions {
-//        kotlinCompilerExtensionVersion = "1.3.2"
-//    }
 
     sourceSets {
         getByName("main") {
@@ -104,14 +101,13 @@ android {
 }
 
 compose {
-//    kotlinCompilerPlugin.set(dependencies.compiler.forKotlin("1.8.0"))
     kotlinCompilerPlugin.set(kotlinz.versions.compose.compiler)
-    kotlinCompilerPluginArgs.add(kotlinz.versions.compose.compiler.map {
-        "suppressKotlinVersionCompatibilityCheck=$it"
-    })
+//    kotlinCompilerPluginArgs.add(kotlinz.versions.kotlin.map {
+//        "suppressKotlinVersionCompatibilityCheck=$it"
+//    })
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.dsl.KotlinCompile::class).configureEach {
+tasks.withType(KotlinCompile::class).configureEach {
     kotlinOptions {
         val v = kotlinz.versions.kotlin.get()
         freeCompilerArgs += listOf(
