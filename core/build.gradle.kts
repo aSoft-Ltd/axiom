@@ -28,7 +28,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(projects.expectCore)
+                api(projects.kommanderCore)
             }
         }
 
