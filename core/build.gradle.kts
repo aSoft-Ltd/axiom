@@ -1,14 +1,12 @@
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 
 plugins {
-    id("com.android.library")
     kotlin("multiplatform")
     id("org.jetbrains.compose")
 }
 
 kotlin {
-    android()
-    jvm()
+    jvm { targetJava() }
     js(IR) { browser() }
 //    wasm { browser() }
 
@@ -32,17 +30,6 @@ kotlin {
             }
         }
 
-        val androidMain by getting {
-            dependsOn(canvasMain)
-            dependencies {
-                api(compose.foundation)
-                api(compose.uiTooling)
-                api(compose.preview)
-                api("androidx.appcompat:appcompat:1.4.1")
-                api("androidx.activity:activity-compose:1.4.0")
-            }
-        }
-
         val jvmMain by getting {
             dependsOn(canvasMain)
             dependencies {
@@ -63,39 +50,6 @@ kotlin {
             dependencies {
                 api(compose.web.core)
             }
-        }
-    }
-}
-
-//tasks.withType<KotlinCompile> {
-//    kotlinOptions.jvmTarget = "11"
-//}
-
-android {
-    compileSdk = 32
-
-    namespace = "tz.co.asoft.axiom"
-
-    defaultConfig {
-        minSdk = 21
-        targetSdk = 31
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    buildFeatures {
-        buildConfig = false
-        compose = true
-    }
-
-    sourceSets {
-        getByName("main") {
-            manifest.srcFile("src/androidMain/AndroidManifest.xml")
-//            res.srcDirs("src/androidMain/res", "src/commonMain/resources")
-//        }
         }
     }
 }
